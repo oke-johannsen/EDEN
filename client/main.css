@@ -1,1 +1,22 @@
+:root {
+  --background-color: #f0e2d0;
+  --primary-color: #70af85;
+}
 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#react-target {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--background-color);
+}
+
+.login_form {
+  padding: 3rem 6rem;
+}

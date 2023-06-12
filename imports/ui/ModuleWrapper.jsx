@@ -117,10 +117,10 @@ export default function ModuleWrapper({ user }) {
             <div
               style={{
                 borderRadius: "2rem 0 0 2rem",
-                border: "1px dashed var(--primary-color)",
                 height: "100%",
                 width: "100%",
                 padding: "1rem 0 0 2rem",
+                background: "#edd3bd",
               }}
             >
               body

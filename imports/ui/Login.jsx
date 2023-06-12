@@ -65,7 +65,7 @@ export default function Login({}) {
               }}
             />
             <Col span={24}>
-              <h1 style={{ color: "#556E53", textAlign: "center" }}>
+              <h1 style={{ color: "#5d7266", textAlign: "center" }}>
                 Welcome, to EDEN
               </h1>
             </Col>

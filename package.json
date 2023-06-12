@@ -14,6 +14,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.6.1",
     "babel-polyfill": "^6.26.0",
+    "dayjs": "^1.11.8",
     "draft-js": "^0.11.7",
     "meteor-node-stubs": "^1.2.5",
     "mongoose": "^7.2.3",

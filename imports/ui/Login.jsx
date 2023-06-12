@@ -17,7 +17,7 @@ import {
 import message from "antd/lib/message";
 import { Meteor } from "meteor/meteor";
 
-export default function Login() {
+export default function Login({}) {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const onFinish = (values) => {
@@ -170,8 +170,8 @@ export default function Login() {
           style={{
             objectFit: "cover",
             width: "100%",
-            height: "100%",
-            borderRadius: "20% 0 0 20%",
+            maxHeight: "50rem",
+            borderRadius: "10rem 0 0 10rem",
           }}
         />
       </Col>

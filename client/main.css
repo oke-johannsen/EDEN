@@ -14,7 +14,7 @@ body,
   padding: 0;
   height: 100%;
   width: 100%;
-  background-color: var(--background-color);
+  background: var(--background-color);
 }
 
 .login_form {

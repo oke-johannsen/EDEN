@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import Login from "./Login";
 import ConfigProvider from "antd/lib/config-provider";
 import { Meteor } from "meteor/meteor";
+import ModuleWrapper from "./ModuleWrapper";
+import { useTracker } from "meteor/react-meteor-data";
 
 export const App = () => {
+  const currentUser = useTracker(() => Meteor.user(), []);
   const html = document.getElementsByTagName("html")[0];
   html.setAttribute("lang", "en");
   return (
@@ -27,7 +30,7 @@ export const App = () => {
           },
         }}
       >
-        {Meteor.user() ? <>logged in.</> : <Login />}
+        {currentUser ? <ModuleWrapper user={currentUser} /> : <Login />}
       </ConfigProvider>
     </>
   );

@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Meteor } from "meteor/meteor";
+import { useTracker } from "meteor/react-meteor-data";
+import ModuleWrapper from "./ModuleWrapper";
 import Login from "./Login";
 import ConfigProvider from "antd/lib/config-provider";
-import { Meteor } from "meteor/meteor";
-import ModuleWrapper from "./ModuleWrapper";
-import { useTracker } from "meteor/react-meteor-data";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
+
+const html = document.getElementsByTagName("html")[0];
+html.setAttribute("lang", "en");
 
 export const App = () => {
   const currentUser = useTracker(() => Meteor.user(), []);
-  const html = document.getElementsByTagName("html")[0];
-  html.setAttribute("lang", "en");
+
   return (
     <>
       <ConfigProvider
@@ -30,7 +34,77 @@ export const App = () => {
           },
         }}
       >
-        {currentUser ? <ModuleWrapper user={currentUser} /> : <Login />}
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                currentUser ? <ModuleWrapper user={currentUser} /> : <Login />
+              }
+            />
+            <Route
+              path="/notes"
+              element={
+                currentUser ? (
+                  <ModuleWrapper user={currentUser} activePath={"notes"} />
+                ) : (
+                  <Login />
+                )
+              }
+            />
+            <Route
+              path="/calendar"
+              element={
+                currentUser ? (
+                  <ModuleWrapper user={currentUser} activePath={"calendar"} />
+                ) : (
+                  <Login />
+                )
+              }
+            />
+            <Route
+              path="/mail"
+              element={
+                currentUser ? (
+                  <ModuleWrapper user={currentUser} activePath={"mail"} />
+                ) : (
+                  <Login />
+                )
+              }
+            />
+            <Route
+              path="/tasks"
+              element={
+                currentUser ? (
+                  <ModuleWrapper user={currentUser} activePath={"tasks"} />
+                ) : (
+                  <Login />
+                )
+              }
+            />
+            <Route
+              path="/tags"
+              element={
+                currentUser ? (
+                  <ModuleWrapper user={currentUser} activePath={"tags"} />
+                ) : (
+                  <Login />
+                )
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                currentUser ? (
+                  <ModuleWrapper user={currentUser} activePath={"settings"} />
+                ) : (
+                  <Login />
+                )
+              }
+            />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </Router>
       </ConfigProvider>
     </>
   );

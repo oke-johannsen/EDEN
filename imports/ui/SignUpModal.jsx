@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "antd/lib/modal";
 import Form from "antd/lib/form";
 import Input from "antd/lib/input";
@@ -10,8 +10,9 @@ import {
 } from "@ant-design/icons";
 import Button from "antd/lib/button";
 import message from "antd/lib/message";
+import { Meteor } from "meteor/meteor";
 
-export default function SignUpModal({ isOpen, setIsOpen }) {
+const SignUpModal = ({ isOpen, setIsOpen }) => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -143,4 +144,6 @@ export default function SignUpModal({ isOpen, setIsOpen }) {
       </Form>
     </Modal>
   );
-}
+};
+
+export default SignUpModal;

@@ -17,7 +17,7 @@ import {
 import message from "antd/lib/message";
 import { Meteor } from "meteor/meteor";
 
-export default function Login({}) {
+const Login = ({}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const onFinish = (values) => {
@@ -177,4 +177,6 @@ export default function Login({}) {
       </Col>
     </Row>
   );
-}
+};
+
+export default Login;

@@ -1,6 +1,7 @@
 :root {
   --background-color: #f0e2d0;
   --primary-color: #70af85;
+  --hover-color: #97bda2;
 }
 
 * {
@@ -19,4 +20,14 @@ body,
 
 .login_form {
   padding: 3rem 6rem;
+}
+
+.sidebar-button {
+  color: var(--primary-color);
+  font-size: 2rem;
+  height: auto;
+}
+
+.sidebar-button:not(:disabled):hover {
+  color: var(--hover-color);
 }

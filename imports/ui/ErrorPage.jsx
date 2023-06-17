@@ -8,7 +8,7 @@ const ErrorPage = () => {
   const backHome = () => navigate("/");
   return (
     <Result
-      status={"404"}
+      status={"403"}
       title="Page doesn't exist"
       subTitle="Sorry, the page you visited does not exist."
       extra={

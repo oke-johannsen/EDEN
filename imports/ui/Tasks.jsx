@@ -69,7 +69,6 @@ const Tasks = () => {
         columns={columns}
         pagination={tasks.length > 10 ? { pageSize: 10 } : false}
         responsive
-        bordered
         rowKey="_id"
         style={{ maxHeight: "80vh", overflow: "auto", padding: "0.5rem" }}
         onRow={(record, rowIndex) => {

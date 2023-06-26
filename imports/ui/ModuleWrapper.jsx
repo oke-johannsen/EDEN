@@ -16,9 +16,9 @@ const ModuleWrapper = ({ user, activePath }) => {
         return <Notes />;
       case "calendar":
         return <Calendar />;
-      case "mail":
       case "tasks":
         return <Tasks />;
+      case "mail":
       case "tags":
       case "settings":
         return <ErrorPage />;

@@ -5,6 +5,7 @@ import Headline from "./Headline";
 import NavBar from "./NavBar";
 import ErrorPage from "./ErrorPage";
 import Notes from "./Notes";
+import Calendar from "./Calendar";
 
 const ModuleWrapper = ({ user, activePath }) => {
   const [leftSiderExpanded, setLeftSiderExpanded] = useState(false);
@@ -13,6 +14,7 @@ const ModuleWrapper = ({ user, activePath }) => {
       case "notes":
         return <Notes />;
       case "calendar":
+        return <Calendar />;
       case "mail":
       case "tasks":
       case "tags":

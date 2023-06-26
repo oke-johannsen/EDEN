@@ -12,17 +12,17 @@
     "@babel/runtime": "^7.20.7",
     "@headlessui/react": "^1.7.15",
     "@reduxjs/toolkit": "^1.9.5",
-    "antd": "^5.6.1",
+    "antd": "^5.6.3",
     "babel-polyfill": "^6.26.0",
     "dayjs": "^1.11.8",
     "draft-js": "^0.11.7",
     "meteor-node-stubs": "^1.2.5",
-    "mongoose": "^7.2.3",
+    "mongoose": "^7.3.1",
     "nodemailer": "^6.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router": "^6.12.1",
-    "react-router-dom": "^6.12.1",
+    "react-router": "^6.14.0",
+    "react-router-dom": "^6.14.0",
     "redux": "^4.2.1",
     "supertest": "^6.3.3"
   },
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@types/antd": "^1.0.0",
-    "eslint": "^8.42.0",
+    "eslint": "^8.43.0",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^29.5.0"
   }

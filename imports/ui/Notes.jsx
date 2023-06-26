@@ -21,8 +21,9 @@ const Notes = ({}) => {
   const { notes } = useTracker(() => {
     const handle = Meteor.subscribe("notes");
     const userId = Meteor.user()?._id;
-    const notes = NotesApi.find({ createdBy: userId }).fetch();
-    console.log(notes);
+    const notes = handle.ready()
+      ? NotesApi.find({ createdBy: userId }).fetch()
+      : [];
     return {
       notes,
     };
@@ -67,6 +68,14 @@ const Notes = ({}) => {
     });
   };
 
+  const deleteNote = (id) => {
+    Meteor.call("notes.delete", id, (err, _res) => {
+      if (id === selectedId && !err) {
+        resetEditorStateAndId();
+      }
+    });
+  };
+
   const resetEditorStateAndId = () => {
     setEditorState(EditorState.createEmpty());
     setSetSelectedId(null);
@@ -85,6 +94,7 @@ const Notes = ({}) => {
       <Row>
         <Col span={8}>
           <List
+            style={{ width: "100%" }}
             size="large"
             header={<h2 style={{ margin: 0 }}>Notes</h2>}
             footer={
@@ -101,9 +111,7 @@ const Notes = ({}) => {
                 key={item._id}
                 actions={[
                   <EditOutlined onClick={() => setSetSelectedId(item._id)} />,
-                  <DeleteOutlined
-                    onClick={() => Meteor.call("notes.delete", item._id)}
-                  />,
+                  <DeleteOutlined onClick={() => deleteNote(item._id)} />,
                 ]}
               >
                 {item.blocks[0]?.text}
@@ -128,6 +136,7 @@ const Notes = ({}) => {
               </h2>
             }
             headStyle={{ padding: "14px 24px" }}
+            bodyStyle={{ minHeight: "71vh" }}
             extra={
               <Button
                 onClick={saveNote}

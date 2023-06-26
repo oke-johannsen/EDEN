@@ -2,6 +2,8 @@ import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import "../imports/api/NotesApi";
 import "../imports/api/AppointmentApi";
+import "../imports/api/TasksApi";
+
 Meteor.startup(async () => {});
 
 if (Meteor.isServer) {

@@ -65,7 +65,13 @@ const Calendar = () => {
         onClose={resetDrawer}
         title="Appointment"
         width={"25%"}
-        children={<AppointmentForm onFinish={onFinish} model={model} />}
+        children={
+          <AppointmentForm
+            onFinish={onFinish}
+            model={model}
+            onClose={resetDrawer}
+          />
+        }
       />
     </>
   );

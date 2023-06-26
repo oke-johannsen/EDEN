@@ -9,6 +9,7 @@ import Select from "antd/lib/select";
 import Radio from "antd/lib/radio";
 import Checkbox from "antd/lib/checkbox";
 import Tooltip from "antd/lib/tooltip";
+import { Meteor } from "meteor/meteor";
 
 const { Option } = Select;
 const dayOptions = [
@@ -27,7 +28,7 @@ const rhythmOptions = [
   { value: "yearly", label: "Every year", key: "yearly" },
 ];
 
-const AppointmentForm = ({ model, onFinish }) => {
+const AppointmentForm = ({ model, onFinish, onClose }) => {
   const [form] = Form.useForm();
   const [recurring, setRecurring] = useState(model?.recurring ? 1 : 0);
 
@@ -155,9 +156,19 @@ const AppointmentForm = ({ model, onFinish }) => {
         </>
       )}
       <Row style={{ width: "100%" }} justify="end">
-        <Col>
+        <Col style={{ marginRight: 8 }}>
           <Button type="primary" htmlType="submit">
             Submit
+          </Button>
+        </Col>
+        <Col>
+          <Button
+            danger
+            onClick={() =>
+              Meteor.call("appointments.delete", model._id, () => onClose())
+            }
+          >
+            Delete
           </Button>
         </Col>
       </Row>

@@ -16,8 +16,9 @@ export const App = () => {
   return (
     <>
       <ConfigProvider
-        theme={{
-          token: {
+        theme={
+          {
+            /* token: {
             colorTextBase: "#ffffff",
             fontSize: 16,
             sizeStep: 4,
@@ -31,8 +32,9 @@ export const App = () => {
             colorTextTertiary: "rgba(0, 0, 0, 0.45)",
             colorTextQuaternary: "rgba(0, 0, 0, 0.25)",
             colorBgSpotlight: "rgba(0, 0, 0, 0.85)",
-          },
-        }}
+          }, */
+          }
+        }
       >
         <Router>
           <Routes>

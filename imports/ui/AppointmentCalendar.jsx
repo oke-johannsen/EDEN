@@ -5,6 +5,7 @@ import Col from "antd/lib/col";
 import Button from "antd/lib/button";
 import dayjs from "dayjs";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import Tooltip from "antd/lib/tooltip";
 const isSameOrAfter = require("dayjs/plugin/isSameOrAfter");
 const isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
 dayjs.extend(isSameOrAfter);
@@ -91,12 +92,20 @@ const AppointmentCalendar = ({
 
   return (
     <Calendar
+      style={{ marginInline: "1rem", borderRadius: 8 }}
       cellRender={cellRender}
       value={selectedDay}
-      onSelect={() => setDrawerStatus("opened")}
+      onSelect={(day) => {
+        setSelectedDay(day);
+        setDrawerStatus("opened");
+      }}
       headerRender={() => {
         return (
-          <Row gutter={8} align="middle" style={{ width: "100%" }}>
+          <Row
+            gutter={8}
+            align="middle"
+            style={{ width: "100%", padding: "0.5rem" }}
+          >
             <Col>
               <Button
                 onClick={() =>
@@ -107,13 +116,15 @@ const AppointmentCalendar = ({
               </Button>
             </Col>
             <Col>
-              <Button
-                style={{ minWidth: 135 }}
-                type="primary"
-                onClick={() => setSelectedDay(dayjs())}
-              >
-                {dayjs(selectedDay).format("DD. MMMM")}
-              </Button>
+              <Tooltip title="Jump back to today" placement="bottom">
+                <Button
+                  style={{ minWidth: 135 }}
+                  type="primary"
+                  onClick={() => setSelectedDay(dayjs())}
+                >
+                  {dayjs(selectedDay).format("DD. MMMM")}
+                </Button>
+              </Tooltip>
             </Col>
             <Col>
               <Button

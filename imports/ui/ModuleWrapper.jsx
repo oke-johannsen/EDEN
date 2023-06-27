@@ -18,7 +18,6 @@ const ModuleWrapper = ({ user, activePath }) => {
         return <Calendar />;
       case "tasks":
         return <Tasks />;
-      case "mail":
       case "tags":
       case "settings":
         return <ErrorPage />;
@@ -33,7 +32,6 @@ const ModuleWrapper = ({ user, activePath }) => {
         style={{
           height: "100vh",
           width: "100vw",
-          background: "var(--background-color)",
         }}
       >
         <Header
@@ -45,19 +43,15 @@ const ModuleWrapper = ({ user, activePath }) => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            background: "var(--background-color)",
-            paddingLeft: leftSiderExpanded ? 200 : 80,
+            paddingLeft: leftSiderExpanded ? 216 : 96,
             paddingRight: "1rem",
             transition: "all 0.2s,background 0s",
+            background: "transparent",
           }}
         >
           <Headline user={user} />
         </Header>
-        <Layout
-          style={{
-            background: "var(--background-color)",
-          }}
-        >
+        <Layout>
           <Sider
             collapsed={!leftSiderExpanded}
             onMouseEnter={() => setLeftSiderExpanded(!leftSiderExpanded)}
@@ -69,13 +63,14 @@ const ModuleWrapper = ({ user, activePath }) => {
               alignItems: "center",
               paddingInline: "1rem",
               transition: "all 0.2s,background 0s",
+              background: "#fafafa",
+              borderTopRightRadius: 8,
+              borderBottomRightRadius: 8,
             }}
           >
             <NavBar leftSiderExpanded={leftSiderExpanded} />
           </Sider>
-          <Content style={{ borderRadius: "10rem 0 0 10rem" }}>
-            {getContent()}
-          </Content>
+          <Content>{getContent()}</Content>
         </Layout>
         <Footer
           style={{
@@ -85,14 +80,11 @@ const ModuleWrapper = ({ user, activePath }) => {
             width: "100%",
             display: "flex",
             alignItems: "center",
-            paddingLeft: leftSiderExpanded ? 200 : 80,
-            background: "var(--background-color)",
+            paddingLeft: leftSiderExpanded ? 216 : 96,
             transition: "all 0.2s,background 0s",
           }}
         >
-          <h3 style={{ color: "var(--primary-color)", margin: 0, padding: 0 }}>
-            footer
-          </h3>
+          <h3 style={{ margin: 0, padding: 0 }}>footer</h3>
         </Footer>
       </Layout>
     </>

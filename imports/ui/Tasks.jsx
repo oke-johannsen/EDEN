@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Table from "antd/lib/table";
 import Button from "antd/lib/button";
-import Select from "antd/lib/select";
 import { useTracker } from "meteor/react-meteor-data";
 import { Meteor } from "meteor/meteor";
 import { TasksApi } from "../api/TasksApi";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import TaskModal from "./TaskModal";
+import Row from "antd/lib/row";
+import Col from "antd/lib/col";
 
-const { Option } = Select;
 const columns = [
   {
     title: "Name",
@@ -61,16 +61,13 @@ const Tasks = () => {
 
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
-        Add Task <PlusCircleOutlined />
-      </Button>
       <Table
         dataSource={tasks}
         columns={columns}
         pagination={tasks.length > 10 ? { pageSize: 10 } : false}
         responsive
         rowKey="_id"
-        style={{ maxHeight: "80vh", overflow: "auto", padding: "0.5rem" }}
+        style={{ maxHeight: "80vh", overflow: "auto", padding: "0 1rem" }}
         onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
@@ -80,6 +77,13 @@ const Tasks = () => {
           };
         }}
       />
+      <Row justify="end" style={{ marginRight: "1rem", marginTop: "0.5rem" }}>
+        <Col>
+          <Button type="dashed" onClick={showModal}>
+            Add Task <PlusCircleOutlined />
+          </Button>
+        </Col>
+      </Row>
       <TaskModal
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}

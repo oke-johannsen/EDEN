@@ -87,8 +87,7 @@ const Notes = ({}) => {
         borderRadius: "2rem 0 0 2rem",
         height: "100%",
         width: "100%",
-        padding: "2rem 0 0 2rem",
-        background: "#edd3bd",
+        paddingLeft: "2rem",
       }}
     >
       <Row>
@@ -138,12 +137,7 @@ const Notes = ({}) => {
             headStyle={{ padding: "14px 24px" }}
             bodyStyle={{ minHeight: "71vh" }}
             extra={
-              <Button
-                onClick={saveNote}
-                type="primary"
-                loading={saving}
-                disabled={saving}
-              >
+              <Button onClick={saveNote} loading={saving} disabled={saving}>
                 Save <SaveOutlined />
               </Button>
             }

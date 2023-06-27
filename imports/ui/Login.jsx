@@ -65,14 +65,9 @@ const Login = ({}) => {
               }}
             />
             <Col span={24}>
-              <h1 style={{ color: "#5d7266", textAlign: "center" }}>
-                Welcome, to EDEN
-              </h1>
+              <h1 style={{ textAlign: "center" }}>Welcome, to EDEN</h1>
             </Col>
-            <Col
-              span={24}
-              style={{ fontSize: 24, fontWeight: "bold", color: "#70af85" }}
-            >
+            <Col span={24} style={{ fontSize: 24, fontWeight: "bold" }}>
               Sign into your account
             </Col>
             <Col span={24}>

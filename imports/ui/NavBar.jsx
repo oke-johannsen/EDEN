@@ -1,8 +1,7 @@
 import {
   BookOutlined,
   CalendarOutlined,
-  CarryOutOutlined,
-  MailOutlined,
+  CheckSquareOutlined,
   SettingOutlined,
   TagOutlined,
 } from "@ant-design/icons";
@@ -17,8 +16,7 @@ const NavBar = ({ leftSiderExpanded }) => {
   const areas = [
     { key: "notes", icon: <BookOutlined /> },
     { key: "calendar", icon: <CalendarOutlined /> },
-    { key: "mail", icon: <MailOutlined /> },
-    { key: "tasks", icon: <CarryOutOutlined /> },
+    { key: "tasks", icon: <CheckSquareOutlined /> },
     { key: "tags", icon: <TagOutlined /> },
     { key: "settings", icon: <SettingOutlined /> },
   ];
@@ -26,7 +24,7 @@ const NavBar = ({ leftSiderExpanded }) => {
   return (
     <Row justify="center" align="middle">
       {areas.map((area) => (
-        <Col span={24} key={area.key}>
+        <Col span={24} key={area.key} style={{ paddingTop: "1rem" }}>
           <Button
             className="sidebar-button"
             type="text"

@@ -1,8 +1,8 @@
 import React from "react";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
-import ModuleWrapper from "./ModuleWrapper";
-import Login from "./Login";
+import ModuleWrapper from "./layout/ModuleWrapper";
+import Login from "./login/Login";
 import ConfigProvider from "antd/lib/config-provider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ErrorPage from "./ErrorPage";

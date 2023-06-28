@@ -15,7 +15,8 @@ import { EditorState, convertFromRaw, convertToRaw } from "draft-js";
 import { Meteor } from "meteor/meteor";
 import message from "antd/lib/message";
 import { useTracker } from "meteor/react-meteor-data";
-import { NotesApi } from "../api/NotesApi";
+import { NotesApi } from "../../api/NotesApi";
+import { TagsApi } from "../../api/TagsApi";
 
 const Notes = ({}) => {
   const { notes } = useTracker(() => {
@@ -34,7 +35,14 @@ const Notes = ({}) => {
   );
 
   const [selectedId, setSetSelectedId] = useState(null);
+  const [tags, setTags] = useState([]);
   const [saving, setSaving] = useState(false);
+
+  const { getTag } = useTracker(() => {
+    Meteor.subscribe("tags");
+    const getTag = (tagId) => TagsApi.findOne(tagId);
+    return { getTag };
+  }, []);
 
   useEffect(() => {
     const note = NotesApi.findOne(selectedId);
@@ -51,6 +59,7 @@ const Notes = ({}) => {
   const saveNote = () => {
     setSaving(true);
     const payload = convertToRaw(editorState.getCurrentContent());
+    payload.tags = tags;
     const method = selectedId ? "update" : "insert";
     if (method === "update") {
       payload._id = selectedId;
@@ -79,6 +88,7 @@ const Notes = ({}) => {
   const resetEditorStateAndId = () => {
     setEditorState(EditorState.createEmpty());
     setSetSelectedId(null);
+    setTags([]);
   };
 
   return (
@@ -109,11 +119,26 @@ const Notes = ({}) => {
               <List.Item
                 key={item._id}
                 actions={[
-                  <EditOutlined onClick={() => setSetSelectedId(item._id)} />,
-                  <DeleteOutlined onClick={() => deleteNote(item._id)} />,
+                  <EditOutlined
+                    onClick={() => {
+                      setSetSelectedId(item._id);
+                      setTags(item.tags || []);
+                    }}
+                  />,
+                  <DeleteOutlined
+                    onClick={() => deleteNote(item._id)}
+                    style={{ color: "#ff4d4f" }}
+                  />,
                 ]}
               >
-                {item.blocks[0]?.text}
+                <List.Item.Meta
+                  title={item.blocks[0]?.text}
+                  description={item.tags
+                    ?.map((tag) => {
+                      return getTag(tag)?.name;
+                    })
+                    .join(", ")}
+                />
               </List.Item>
             )}
           />
@@ -146,6 +171,8 @@ const Notes = ({}) => {
             <DraftEditor
               editorState={editorState}
               setEditorState={setEditorState}
+              tags={tags}
+              setTags={setTags}
             />
           </Card>
         </Col>

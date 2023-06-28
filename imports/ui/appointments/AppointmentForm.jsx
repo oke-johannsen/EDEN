@@ -10,6 +10,8 @@ import Radio from "antd/lib/radio";
 import Checkbox from "antd/lib/checkbox";
 import Tooltip from "antd/lib/tooltip";
 import { Meteor } from "meteor/meteor";
+import TagSelect from "../tags/TagSelect";
+import { DeleteOutlined, SaveOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 const dayOptions = [
@@ -28,7 +30,7 @@ const rhythmOptions = [
   { value: "yearly", label: "Every year", key: "yearly" },
 ];
 
-const AppointmentForm = ({ model, onFinish, onClose }) => {
+const AppointmentForm = ({ model, onFinish, onCancel }) => {
   const [form] = Form.useForm();
   const [recurring, setRecurring] = useState(model?.recurring ? 1 : 0);
 
@@ -37,6 +39,7 @@ const AppointmentForm = ({ model, onFinish, onClose }) => {
     form.setFieldValue("start", model?.start);
     form.setFieldValue("end", model?.end);
     form.setFieldValue("location", model?.location);
+    form.setFieldValue("tags", model?.tags);
     form.setFieldValue("recurring", model?.recurring || recurring);
     if (model?.recurring) {
       form.setFieldValue(
@@ -155,22 +158,30 @@ const AppointmentForm = ({ model, onFinish, onClose }) => {
           </Form.Item>
         </>
       )}
+      <Form.Item name="tags" label="Tags">
+        <TagSelect
+          value={model.tags}
+          onChange={(value) => form.setFieldValue("tags", value)}
+        />
+      </Form.Item>
       <Row style={{ width: "100%" }} justify="end">
         <Col style={{ marginRight: 8 }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            Save <SaveOutlined />
           </Button>
         </Col>
-        <Col>
-          <Button
-            danger
-            onClick={() =>
-              Meteor.call("appointments.delete", model._id, () => onClose())
-            }
-          >
-            Delete
-          </Button>
-        </Col>
+        {model._id && (
+          <Col>
+            <Button
+              danger
+              onClick={() =>
+                Meteor.call("appointments.delete", model._id, () => onCancel())
+              }
+            >
+              Delete <DeleteOutlined />
+            </Button>
+          </Col>
+        )}
       </Row>
     </Form>
   );

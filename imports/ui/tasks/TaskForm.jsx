@@ -5,7 +5,11 @@ import Input from "antd/lib/input";
 import DatePicker from "antd/lib/date-picker";
 import Select from "antd/lib/select";
 import { Meteor } from "meteor/meteor";
+import TagSelect from "../tags/TagSelect";
 import dayjs from "dayjs";
+import Row from "antd/lib/row";
+import Col from "antd/lib/col";
+import { DeleteOutlined, SaveOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -18,6 +22,7 @@ const TaskForm = ({ setIsModalVisible, model = {}, setModel }) => {
     form.setFieldValue("dueDate", model?.dueDate);
     form.setFieldValue("description", model?.description);
     form.setFieldValue("status", model?.status);
+    form.setFieldValue("tags", model?.tags);
 
     return () => {
       form.resetFields();
@@ -40,7 +45,12 @@ const TaskForm = ({ setIsModalVisible, model = {}, setModel }) => {
     });
   };
   return (
-    <Form form={form} onFinish={onFinish} layout="vertical">
+    <Form
+      form={form}
+      onFinish={onFinish}
+      initialValues={{ status: "todo" }}
+      layout="vertical"
+    >
       <Form.Item
         name="name"
         label="Name"
@@ -49,51 +59,62 @@ const TaskForm = ({ setIsModalVisible, model = {}, setModel }) => {
         <Input />
       </Form.Item>
 
-      <Form.Item
-        name="priority"
-        label="Priority"
-        rules={[{ required: true, message: "Please select the task priority" }]}
-      >
-        <Select>
-          <Option value="High">High</Option>
-          <Option value="Medium">Medium</Option>
-          <Option value="Low">Low</Option>
-        </Select>
-      </Form.Item>
+      <Row gutter={8}>
+        <Col span={12}>
+          <Form.Item
+            name="priority"
+            label="Priority"
+            rules={[
+              { required: true, message: "Please select the task priority" },
+            ]}
+          >
+            <Select>
+              <Option value="High">High</Option>
+              <Option value="Medium">Medium</Option>
+              <Option value="Low">Low</Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item
+            name="status"
+            label="Status"
+            rules={[
+              { required: true, message: "Please select the task status" },
+            ]}
+          >
+            <Select>
+              <Option value="todo">To Do</Option>
+              <Option value="inProgress">In Progress</Option>
+              <Option value="done">Done</Option>
+            </Select>
+          </Form.Item>
+        </Col>
+      </Row>
 
-      <Form.Item
-        name="dueDate"
-        label="Due Date"
-        rules={[{ required: true, message: "Please select the due date" }]}
-      >
-        <DatePicker style={{ width: "100%" }} format={"DD.MM.YYYY"} />
-      </Form.Item>
+      <Row gutter={8}>
+        <Col span={12}>
+          <Form.Item name="tags" label="Tags">
+            <TagSelect
+              value={model.tags}
+              onChange={(value) => form.setFieldValue("tags", value)}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item name="dueDate" label="Due Date">
+            <DatePicker style={{ width: "100%" }} format={"DD.MM.YYYY"} />
+          </Form.Item>
+        </Col>
+      </Row>
 
-      <Form.Item
-        name="description"
-        label="Description"
-        rules={[
-          { required: true, message: "Please enter the task description" },
-        ]}
-      >
+      <Form.Item name="description" label="Description">
         <Input.TextArea rows={4} />
-      </Form.Item>
-
-      <Form.Item
-        name="status"
-        label="Status"
-        rules={[{ required: true, message: "Please select the task status" }]}
-      >
-        <Select>
-          <Option value="todo">To Do</Option>
-          <Option value="inProgress">In Progress</Option>
-          <Option value="done">Done</Option>
-        </Select>
       </Form.Item>
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Save
+          Save <SaveOutlined />
         </Button>
         {model._id && (
           <Button
@@ -107,7 +128,7 @@ const TaskForm = ({ setIsModalVisible, model = {}, setModel }) => {
               })
             }
           >
-            Delete
+            Delete <DeleteOutlined />
           </Button>
         )}
       </Form.Item>

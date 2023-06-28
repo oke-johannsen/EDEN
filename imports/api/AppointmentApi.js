@@ -21,13 +21,8 @@ if (Meteor.isServer) {
     },
     "appointments.update": (payload) => {
       data = {
-        title: payload.title,
-        start: payload.start,
-        end: payload.end,
-        location: payload.location,
-        recurring: payload.recurring,
-        days: payload.days,
-        rhythm: payload.rhythm,
+        ...payload,
+        _id: undefined,
       };
       const userId = Meteor.user()?._id;
       const timestamp = new Date();

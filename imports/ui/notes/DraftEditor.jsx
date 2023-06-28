@@ -10,8 +10,9 @@ import {
 } from "@ant-design/icons";
 import Row from "antd/lib/row";
 import Col from "antd/lib/col";
+import TagSelect from "../tags/TagSelect";
 
-const DraftEditor = ({ editorState, setEditorState }) => {
+const DraftEditor = ({ editorState, setEditorState, tags, setTags }) => {
   const handleChange = (newEditorState) => {
     setEditorState(newEditorState);
   };
@@ -65,6 +66,9 @@ const DraftEditor = ({ editorState, setEditorState }) => {
       <Button type="text" onClick={() => handleBlockType("ordered-list-item")}>
         <OrderedListOutlined />
       </Button>
+      <Col flex="auto">
+        <TagSelect value={tags} onChange={setTags} style={{ width: "100%" }} />
+      </Col>
       <Col span={24} style={{ padding: "4px 15px" }}>
         <Editor editorState={editorState} onChange={handleChange} />
       </Col>

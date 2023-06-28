@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/en";
-import Drawer from "antd/lib/drawer";
 import AppointmentForm from "./AppointmentForm";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
-import { AppointmentsApi } from "../api/AppointmentApi";
+import { AppointmentsApi } from "../../api/AppointmentApi";
 import AppointmentCalendar from "./AppointmentCalendar";
+import Modal from "antd/lib/modal";
 
 const initAppointmentForm = {
   _id: undefined,
@@ -17,6 +17,7 @@ const initAppointmentForm = {
   recurring: false,
   days: undefined,
   rhythm: undefined,
+  tags: [],
 };
 
 const Calendar = () => {
@@ -29,11 +30,11 @@ const Calendar = () => {
       }).fetch(),
     };
   }, []);
-  const [drawerStatus, setDrawerStatus] = useState("closed");
+  const [modalStatus, setModalStatus] = useState("closed");
   const [model, setModel] = useState(initAppointmentForm);
   const [selectedDay, setSelectedDay] = useState(dayjs());
   const resetDrawer = () => {
-    setDrawerStatus("closed");
+    setModalStatus("closed");
     setModel(initAppointmentForm);
   };
 
@@ -55,23 +56,24 @@ const Calendar = () => {
     <>
       <AppointmentCalendar
         appointments={appointments}
-        setDrawerStatus={setDrawerStatus}
+        setModalStatus={setModalStatus}
         selectedDay={selectedDay}
         setSelectedDay={setSelectedDay}
         setModel={setModel}
       />
-      <Drawer
-        open={drawerStatus !== "closed"}
-        onClose={resetDrawer}
+      <Modal
+        open={modalStatus !== "closed"}
+        onCancel={resetDrawer}
         title="Appointment"
         width={"25%"}
         children={
           <AppointmentForm
             onFinish={onFinish}
             model={model}
-            onClose={resetDrawer}
+            onCancel={resetDrawer}
           />
         }
+        footer={false}
       />
     </>
   );

@@ -34,13 +34,13 @@ const getWeekDayName = (input) => {
 
 const AppointmentCalendar = ({
   appointments,
-  setDrawerStatus,
+  setModalStatus,
   selectedDay,
   setSelectedDay,
   setModel,
 }) => {
   const openAppointment = (appointment) => {
-    setDrawerStatus("opened");
+    setModalStatus("opened");
     const model = {
       ...appointment,
       start: dayjs(appointment.start),
@@ -92,20 +92,17 @@ const AppointmentCalendar = ({
 
   return (
     <Calendar
-      style={{ marginInline: "1rem", borderRadius: 8 }}
+      className="calendar"
+      style={{ marginInline: "1rem", borderRadius: 8, padding: "16px 24px" }}
       cellRender={cellRender}
       value={selectedDay}
       onSelect={(day) => {
         setSelectedDay(day);
-        setDrawerStatus("opened");
+        setModalStatus("opened");
       }}
       headerRender={() => {
         return (
-          <Row
-            gutter={8}
-            align="middle"
-            style={{ width: "100%", padding: "0.5rem" }}
-          >
+          <Row gutter={8} align="middle" style={{ width: "100%" }}>
             <Col>
               <Button
                 onClick={() =>
@@ -119,7 +116,7 @@ const AppointmentCalendar = ({
               <Tooltip title="Jump back to today" placement="bottom">
                 <Button
                   style={{ minWidth: 135 }}
-                  type="primary"
+                  type="dashed"
                   onClick={() => setSelectedDay(dayjs())}
                 >
                   {dayjs(selectedDay).format("DD. MMMM")}

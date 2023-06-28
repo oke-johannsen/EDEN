@@ -9,12 +9,13 @@ if (Meteor.isServer) {
   });
   Meteor.methods({
     "notes.insert": (payload) => {
-      const { blocks, entityMap } = payload;
+      const { blocks, entityMap, tags } = payload;
       const userId = Meteor.user()?._id;
       const timestamp = new Date();
       NotesApi.insert({
         blocks,
         entityMap,
+        tags,
         createdBy: userId,
         updatedBy: userId,
         createdAt: timestamp,
@@ -22,11 +23,17 @@ if (Meteor.isServer) {
       });
     },
     "notes.update": (payload) => {
-      const { blocks, entityMap } = payload;
+      const { blocks, entityMap, tags } = payload;
       const userId = Meteor.user()?._id;
       const timestamp = new Date();
       NotesApi.update(payload._id, {
-        $set: { blocks, entityMap, updatedBy: userId, updatedAt: timestamp },
+        $set: {
+          blocks,
+          entityMap,
+          tags,
+          updatedBy: userId,
+          updatedAt: timestamp,
+        },
       });
     },
     "notes.delete": (noteId) => {

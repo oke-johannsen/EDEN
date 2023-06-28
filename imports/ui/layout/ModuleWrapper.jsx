@@ -1,12 +1,13 @@
 import Sider from "antd/lib/layout/Sider";
 import Layout, { Content, Footer, Header } from "antd/lib/layout/layout";
 import React, { useState } from "react";
-import Headline from "./Headline";
-import NavBar from "./NavBar";
-import ErrorPage from "./ErrorPage";
-import Notes from "./Notes";
-import Calendar from "./Calendar";
-import Tasks from "./Tasks";
+import Headline from "../layout/Headline";
+import NavBar from "../layout/NavBar";
+import ErrorPage from "../ErrorPage";
+import Notes from "../notes/Notes";
+import Calendar from "../appointments/Calendar";
+import Tasks from "../tasks/Tasks";
+import Tags from "../tags/Tags";
 
 const ModuleWrapper = ({ user, activePath }) => {
   const [leftSiderExpanded, setLeftSiderExpanded] = useState(false);
@@ -19,6 +20,7 @@ const ModuleWrapper = ({ user, activePath }) => {
       case "tasks":
         return <Tasks />;
       case "tags":
+        return <Tags />;
       case "settings":
         return <ErrorPage />;
 

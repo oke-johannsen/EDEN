@@ -109,6 +109,12 @@ const AppointmentForm = ({ model, onFinish, onCancel }) => {
       >
         <Input placeholder="Enter the location" />
       </Form.Item>
+      <Form.Item name="tags" label="Tags">
+        <TagSelect
+          value={model.tags}
+          onChange={(value) => form.setFieldValue("tags", value)}
+        />
+      </Form.Item>
       <Form.Item name="recurring">
         <Radio.Group onChange={(e) => setRecurring(e.target.value)}>
           <Radio value={1}>Repeats</Radio>
@@ -158,12 +164,6 @@ const AppointmentForm = ({ model, onFinish, onCancel }) => {
           </Form.Item>
         </>
       )}
-      <Form.Item name="tags" label="Tags">
-        <TagSelect
-          value={model.tags}
-          onChange={(value) => form.setFieldValue("tags", value)}
-        />
-      </Form.Item>
       <Row style={{ width: "100%" }} justify="end">
         <Col style={{ marginRight: 8 }}>
           <Button type="primary" htmlType="submit">

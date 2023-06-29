@@ -16,25 +16,16 @@ export const App = () => {
   return (
     <>
       <ConfigProvider
-        theme={
-          {
-            /* token: {
-            colorTextBase: "#ffffff",
+        theme={{
+          token: {
             fontSize: 16,
             sizeStep: 4,
             sizeUnit: 4,
             borderRadius: 8,
             wireframe: true,
-            colorBgBase: "#f0e2d0",
             colorPrimary: "#70af85",
-            colorText: "rgba(0, 0, 0, 0.88)",
-            colorTextSecondary: "rgba(0, 0, 0, 0.65)",
-            colorTextTertiary: "rgba(0, 0, 0, 0.45)",
-            colorTextQuaternary: "rgba(0, 0, 0, 0.25)",
-            colorBgSpotlight: "rgba(0, 0, 0, 0.85)",
-          }, */
-          }
-        }
+          },
+        }}
       >
         <Router>
           <Routes>

@@ -4,6 +4,7 @@ import "../imports/api/NotesApi";
 import "../imports/api/AppointmentApi";
 import "../imports/api/TasksApi";
 import "../imports/api/TagsApi";
+import "../imports/api/UsersApi";
 
 Meteor.startup(async () => {});
 

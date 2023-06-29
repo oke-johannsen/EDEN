@@ -80,8 +80,7 @@ const Tasks = () => {
       dataIndex: "dueDate",
       key: "dueDate",
       render: (dueDate) => {
-        const isToday =
-          dayjs(dueDate).format("DD.MM.YYYY") === dayjs().format("DD.MM.YYYY");
+        const isToday = dayjs(dueDate).isBefore(dayjs().toDate());
         return (
           <span style={{ color: isToday ? "#ff4d4f" : "inherit" }}>
             {dayjs(dueDate).format("DD.MM.YYYY")}

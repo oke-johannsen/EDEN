@@ -100,8 +100,8 @@ const Notes = ({}) => {
         paddingLeft: "2rem",
       }}
     >
-      <Row>
-        <Col span={8}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} lg={8}>
           <List
             style={{ width: "100%" }}
             size="large"
@@ -143,7 +143,7 @@ const Notes = ({}) => {
             )}
           />
         </Col>
-        <Col span={16}>
+        <Col xs={24} lg={16}>
           <Card
             title={
               <h2
@@ -166,7 +166,6 @@ const Notes = ({}) => {
                 Save <SaveOutlined />
               </Button>
             }
-            style={{ marginInline: "1rem" }}
           >
             <DraftEditor
               editorState={editorState}

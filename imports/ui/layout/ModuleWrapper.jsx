@@ -8,6 +8,7 @@ import Notes from "../notes/Notes";
 import Calendar from "../appointments/Calendar";
 import Tasks from "../tasks/Tasks";
 import Tags from "../tags/Tags";
+import Settings from "../settings/settings";
 
 const ModuleWrapper = ({ user, activePath }) => {
   const [leftSiderExpanded, setLeftSiderExpanded] = useState(false);
@@ -22,7 +23,7 @@ const ModuleWrapper = ({ user, activePath }) => {
       case "tags":
         return <Tags />;
       case "settings":
-        return <ErrorPage />;
+        return <Settings user={user} />;
 
       default:
         return <ErrorPage />;
@@ -86,7 +87,7 @@ const ModuleWrapper = ({ user, activePath }) => {
             transition: "all 0.2s,background 0s",
           }}
         >
-          <h3 style={{ margin: 0, padding: 0 }}>footer</h3>
+          <h3 style={{ margin: 0, padding: 0 }}>EDEN</h3>
         </Footer>
       </Layout>
     </>

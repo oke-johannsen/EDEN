@@ -11,6 +11,10 @@ body,
   width: 100%;
 }
 
+main {
+  max-height: calc(100vh - 137px);
+}
+
 .login_form {
   padding: 3rem 6rem;
 }

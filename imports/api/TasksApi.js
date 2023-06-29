@@ -1,5 +1,6 @@
 import { Mongo } from "meteor/mongo";
 import { Meteor } from "meteor/meteor";
+import dayjs from "dayjs";
 
 export const TasksApi = new Mongo.Collection("tasks");
 
@@ -13,6 +14,9 @@ if (Meteor.isServer) {
       const timestamp = new Date();
       TasksApi.insert({
         ...payload,
+        dueDate: payload.dueDate
+          ? dayjs(payload?.dueDate).startOf("day").toDate()
+          : undefined,
         createdBy: userId,
         updatedBy: userId,
         createdAt: timestamp,
@@ -24,10 +28,17 @@ if (Meteor.isServer) {
       const timestamp = new Date();
       const data = {
         ...payload,
+        dueDate: payload.dueDate
+          ? dayjs(payload?.dueDate).startOf("day").toDate()
+          : undefined,
         _id: undefined,
       };
       TasksApi.update(payload._id, {
-        $set: { ...data, updatedBy: userId, updatedAt: timestamp },
+        $set: {
+          ...data,
+          updatedBy: userId,
+          updatedAt: timestamp,
+        },
       });
     },
     "tasks.delete": (taskId) => {
